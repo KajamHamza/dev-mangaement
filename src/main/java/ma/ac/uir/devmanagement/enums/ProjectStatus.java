@@ -1,4 +1,7 @@
 package ma.ac.uir.devmanagement.enums;
 
-public class ProjectStatus {
+public enum ProjectStatus {
+    NOT_STARTED,
+    IN_PROGRESS,
+    COMPLETED
 }
