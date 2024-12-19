@@ -52,3 +52,4 @@ public class Developer extends User {
         this.evaluations = evaluations;
     }
 }
+

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/scripts.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Search Developers</title>
+</head>
+<body>
+<div class="sidebar">
+    <nav>
+        <p class="nav-label">Navigation</p>
+        <ul>
+            <li><a href="/manager/dashboard"><i data-lucide="layout-dashboard"></i>Dashboard</a></li>
+            <li><a href="/manager/projects"><i data-lucide="folder"></i>Projects</a></li>
+            <li><a href="/manager/search" class="active"><i data-lucide="search"></i>Search Developers</a></li>
+            <li><a href="/manager/settings"><i data-lucide="settings"></i>Settings</a></li>
+            <li><a href="/auth/logout" class="logout"><i data-lucide="log-out"></i>Logout</a></li>
+        </ul>
+    </nav>
+    <div class="theme-toggle">
+        <input type="checkbox" id="themeToggle" />
+        <label for="themeToggle">
+            <i data-lucide="sun"></i>
+        </label>
+    </div>
+</div>
+<div class="main-content">
+    <header>
+        <h1><i data-lucide="search"></i>Search Developers</h1>
+    </header>
+    <div class="card">
+        <form method="GET" action="/manager/search" class="project-form">
+            <div class="form-group">
+                <input type="text" name="query" placeholder="Enter developer name or skill" required>
+            </div>
+            <div class="form-actions">
+                <button class="btn-primary" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+    <section class="card">
+        <h2>Results</h2>
+        <ul th:if="${developers.isEmpty()}">
+            <p>No results found.</p>
+        </ul>
+        <ul th:each="developer : ${developers}">
+            <li>
+                <span th:text="${developer.username}"></span> - <span th:text="${developer.skills}"></span>
+            </li>
+        </ul>
+    </section>
+</div>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
+</body>
+</html>
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/DevProjectDetailsStyle.css">
+    <script src="/js/scripts.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Project Details</title>
+</head>
+<body>
+<div class="sidebar">
+    <nav>
+        <p class="nav-label">Navigation</p>
+        <ul>
+            <li><a href="/developer/dashboard"><i data-lucide="layout-dashboard"></i>Dashboard</a></li>
+            <li><a href="/developer/projects" class="active"><i data-lucide="folder"></i>Assigned Projects</a></li>
+            <li><a href="/developer/profile"><i data-lucide="user"></i>Profile</a></li>
+            <li><a href="/auth/logout" class="logout"><i data-lucide="log-out"></i>Logout</a></li>
+        </ul>
+    </nav>
+</div>
+<div class="main-content">
+    <header>
+        <h1><i data-lucide="folder-open"></i> Project: <span th:text="${project.title}"></span></h1>
+    </header>
+    <section class="card">
+        <h2>Project Details</h2>
+        <p><strong>Description:</strong> <span th:text="${project.description}"></span></p>
+        <p><strong>Status:</strong> <span th:text="${project.status}"></span></p>
+        <p><strong>Duration:</strong> <span th:text="${project.durationInDays}"></span></p>
+        <p><strong>Project Manager:</strong> <span th:text="${project.projectManager.username}"></span></p>
+    </section>
+    <section class="card">
+        <h2><i data-lucide="users"></i> Developers Assigned</h2>
+        <ul>
+            <li th:each="developer : ${project.developers}">
+                <span th:text="${developer.username}"></span>
+                (<span th:text="${developer.email}"></span>)
+            </li>
+        </ul>
+    </section>
+    <section class="card">
+        <h2><i data-lucide="star"></i> Rating and Feedback</h2>
+        <div class="rating">
+            <p><strong>Project Rating:</strong>
+                <span th:if="${evaluation.stars != null}">
+                    <span th:text="${evaluation.stars}"></span>/5
+                </span>
+                <span th:if="${evaluation.stars == null}">Not Rated</span>
+            </p>
+            <!-- Display stars dynamically -->
+            <div class="stars">
+                <span th:each="i : ${#numbers.sequence(1, 5)}">
+                    <i data-lucide="star"
+                       th:classappend="${evaluation.stars >= i ? 'filled-star' : 'empty-star'}">
+                    </i>
+                </span>
+            </div>
+        </div>
+        <div class="feedback">
+            <p><strong>Feedback:</strong></p>
+            <p th:if="${evaluation.feedback != null}" th:text="${evaluation.feedback}"></p>
+            <p th:if="${evaluation.feedback == null}">No feedback provided yet.</p>
+        </div>
+    </section>
+</div>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
+</body>
+</html>

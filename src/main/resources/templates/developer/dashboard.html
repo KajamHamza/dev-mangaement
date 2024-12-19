@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/Devdashboard.css">
+    <script src="/js/scripts.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Developer Dashboard</title>
+</head>
+<body>
+<div class="sidebar">
+    <nav>
+        <p class="nav-label">Navigation</p>
+        <ul>
+            <li><a href="/developer/dashboard" class="active"><i data-lucide="layout-dashboard"></i>Dashboard</a></li>
+            <li><a href="/developer/projects"><i data-lucide="folder"></i>Assigned Projects</a></li>
+            <li><a href="/developer/profile"><i data-lucide="user"></i>Profile</a></li>
+            <li><a href="/auth/logout" class="logout"><i data-lucide="log-out"></i>Logout</a></li>
+        </ul>
+    </nav>
+</div>
+<div class="main-content">
+    <header>
+        <h1>Welcome, Developer</h1>
+    </header>
+
+    <section class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-content">
+                <div>
+                    <p class="stat-label">Projects Assigned</p>
+                    <h3 class="stat-value" th:text="${totalProjects}">0</h3>
+                </div>
+                <div class="stat-icon completed">
+                    <i data-lucide="check-circle"></i>
+                </div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-content">
+                <div>
+                    <p class="stat-label">Ongoing Projects</p>
+                    <h3 class="stat-value">8</h3>
+                </div>
+                <div class="stat-icon ongoing">
+                    <i data-lucide="clock"></i>
+                </div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-content">
+                <div>
+                    <p class="stat-label">Team Members</p>
+                    <h3 class="stat-value">24</h3>
+                </div>
+                <div class="stat-icon team">
+                    <i data-lucide="users"></i>
+                </div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-content">
+                <div>
+                    <p class="stat-label">Ratings Received</p>
+                    <h3 class="stat-value" th:text="${totalRatings}">0</h3>
+                </div>
+                <div class="stat-icon ratings">
+                    <i data-lucide="star"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects-section">
+        <div class="section-header">
+            <h2>Active Projects</h2>
+            <div class="search-filters">
+                <div class="search-box">
+                    <i data-lucide="search"></i>
+                    <input type="text" placeholder="Search projects...">
+                </div>
+                <select class="filter-select">
+                    <option value="all">All Projects</option>
+                    <option value="active">Active</option>
+                    <option value="completed">Completed</option>
+                    <option value="completed">Pending</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="projects-grid" th:if="${projects.isEmpty()}">
+            <div class="empty-state">
+                <i data-lucide="inbox"></i>
+                <p>No projects assigned yet!</p>
+            </div>
+        </div>
+
+        <div class="projects-grid" th:if="${!projects.isEmpty()}">
+            <div class="project-card" th:each="project : ${projects}">
+                <div class="project-header">
+                    <h3>
+                        <a th:href="@{/developer/project/{id}(id=${project.id})}" th:text="${project.title}">Project Title</a>
+                    </h3>
+                    <span class="status-badge" th:text="${project.status}">Active</span>
+                </div>
+                <p class="project-description" th:text="${project.description}">Project description goes here</p>
+
+                <div class="project-footer">
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <i data-lucide="calendar"></i>
+                            <span th:text="${project.durationInDays}">2024-03-15</span>
+                        </div>
+                        <div class="meta-item">
+                            <i data-lucide="users"></i>
+                            <span th:text="${project.developers.size() + ' members'}">5 members</span>
+                        </div>
+                    </div>
+                    <div class="project-actions">
+                        <a class="btn-secondary" th:href="@{/developer/project/{id}(id=${project.id})}">View Details</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+/* General Styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    display: flex;
+    height: 100vh;
+}
+
+.flex {
+    display: flex;
+    width: 100%;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 220px; /* Fixed width */
+    background-color: #ffffff;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    height: 100vh;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #6b7280;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #6b7280;
+}
+
+.empty-state p {
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+}
+
+.sidebar .logo h1 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 1rem;
+}
+
+.sidebar nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    text-decoration: none;
+    color: #1f2937;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar nav ul li a i {
+    margin-right: 0.75rem; /* Add spacing between icon and text */
+}
+
+.sidebar nav ul li a.active {
+    background-color: #4f46e5;
+    color: #ffffff;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #f3f4f6;
+}
+
+.sidebar .theme-toggle {
+    margin-top: auto;
+    text-align: center;
+}
+
+.theme-toggle input {
+    display: none;
+}
+
+.theme-toggle label {
+    cursor: pointer;
+}
+
+.theme-toggle {
+    margin-top: auto;
+}
+
+.theme-toggle button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.main-content {
+    margin-left: 240px;
+    padding: 20px;
+    background-color: #f1f3f5;
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+}
+
+.search-input {
+    padding: 10px;
+    width: 200px;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+}
+
+.status-filter {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+}
+
+.projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjusted to fit more cards */
+    gap: 20px;
+}
+
+.project-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.project-header h3 {
+    margin: 0;
+}
+
+.project-header .status {
+    padding: 5px 10px;
+    border-radius: 16px;
+    font-size: 12px;
+}
+
+.project-header .priority {
+    font-size: 14px;
+}
+
+.project-header .high {
+    color: #e53e3e;
+}
+
+.project-header .medium {
+    color: #dd6b20;
+}
+
+.project-header .low {
+    color: #38a169;
+}
+
+.description {
+    color: #6c757d;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    margin-top: 20px;
+}
+
+.progress {
+    background-color: #e9ecef;
+    height: 8px;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.progress-fill {
+    background-color: #4f46e5;
+    height: 100%;
+}
+
+.team {
+    margin-top: 20px;
+}
+
+.team img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.due-date {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.filter-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Align to the right */
+    margin-bottom: 1.5rem; /* Add some space below */
+    padding: 1rem; /* Add padding for size */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f8f9fa; /* Optional: Add background color */
+}
+

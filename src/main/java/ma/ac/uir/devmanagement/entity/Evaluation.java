@@ -14,7 +14,11 @@ public class Evaluation {
     @JoinColumn(name = "developer_id")
     private Developer developer;
 
-    private int rating;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    private Project project;
+
+    private int stars;  // Changed from rating to stars for consistency
 
     @Column(length = 1000)
     private String feedback;
@@ -22,9 +26,10 @@ public class Evaluation {
     // Constructors
     public Evaluation() {}
 
-    public Evaluation(Developer developer, int rating, String feedback) {
+    public Evaluation(Developer developer, Project project, int stars, String feedback) {
         this.developer = developer;
-        this.rating = rating;
+        this.project = project;
+        this.stars = stars;
         this.feedback = feedback;
     }
 
@@ -45,12 +50,20 @@ public class Evaluation {
         this.developer = developer;
     }
 
-    public int getRating() {
-        return rating;
+    public Project getProject() {
+        return project;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public int getStars() {
+        return stars;
+    }
+
+    public void setStars(int stars) {
+        this.stars = stars;
     }
 
     public String getFeedback() {

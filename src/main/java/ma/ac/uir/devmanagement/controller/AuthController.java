@@ -42,7 +42,7 @@ public class AuthController {
             return "login";
         }
         session.setAttribute("currentUser", user);
-        return "redirect:/home";
+        return "redirect:/dashboard";
     }
 
     // Register Page

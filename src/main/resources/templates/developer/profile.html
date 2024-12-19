@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/scripts.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Profile</title>
+</head>
+<body>
+<div class="sidebar">
+    <nav>
+        <p class="nav-label">Navigation</p>
+        <ul>
+            <li><a href="/developer/dashboard"><i data-lucide="layout-dashboard"></i>Dashboard</a></li>
+            <li><a href="/developer/projects"><i data-lucide="folder"></i>Assigned Projects</a></li>
+            <li><a href="/developer/profile" class="active"><i data-lucide="user"></i>Profile</a></li>
+            <li><a href="/auth/logout" class="logout"><i data-lucide="log-out"></i>Logout</a></li>
+        </ul>
+    </nav>
+</div>
+<div class="main-content">
+    <header>
+        <h1><i data-lucide="user"></i> Update Profile</h1>
+    </header>
+    <section class="profile-section">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <img alt="Profile Picture"
+                     src="/images/default-avatar.png">
+            </div>
+
+        </div>
+    </section>
+    <section class="card">
+        <form method="POST" action="/developer/updateProfile" class="profile-form">
+            <!-- Name Field -->
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" th:value="${developer.username}" required>
+            </div>
+            <!-- Email Field -->
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" th:value="${developer.email}" required>
+            </div>
+            <!-- Skills Section -->
+            <div class="form-group">
+                <label for="skills">Skills (separate with commas)</label>
+                <textarea id="skills" name="skills"
+                          th:text="${#strings.listJoin(developer.skills, ', ')}"
+                          placeholder="e.g., Java, Spring Boot, React, Docker"></textarea>
+            </div>
+            <!-- Submit Button -->
+            <div class="form-actions">
+                <button class="btn-primary" type="submit">Update Profile</button>
+            </div>
+        </form>
+    </section>
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
+</body>
+</html>

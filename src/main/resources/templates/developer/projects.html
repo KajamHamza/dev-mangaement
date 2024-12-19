@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assigned Projects</title>
+    <link rel="stylesheet" href="/css/DevProjects.css">
+    <script src="/js/scripts.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="sidebar">
+
+    <nav>
+        <p class="nav-label">Navigation</p>
+        <ul>
+            <li><a href="/developer/dashboard"><i data-lucide="layout-dashboard"></i>Dashboard</a></li>
+            <li><a href="/developer/projects" class="active"><i data-lucide="folder"></i>Assigned Projects</a></li>
+            <li><a href="/developer/profile"><i data-lucide="user"></i>Profile</a></li>
+            <li><a href="/auth/logout" class="logout"><i data-lucide="log-out"></i>Logout</a></li>
+        </ul>
+    </nav>
+</div>
+
+<div class="main-content">
+    <header>
+        <h1><i data-lucide="folder"></i> Assigned Projects</h1>
+    </header>
+    <section class="projects-section">
+        <div class="filter-section">
+            <label for="statusFilter">Filter by Status:</label>
+            <select id="statusFilter" onchange="filterProjects()">
+                <option value="all">All</option>
+                <option value="active">Active</option>
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
+            </select>
+        </div>
+        <div class="projects-grid" th:if="${projects.isEmpty()}">
+            <div class="empty-state">
+                <i data-lucide="inbox"></i>
+                <p>No projects assigned yet!</p>
+            </div>
+        </div>
+
+        <div class="projects-grid" th:if="${!projects.isEmpty()}">
+            <div class="project-card" th:each="project : ${projects}" th:data-status="${project.status}">
+                <div class="project-header">
+                    <h3 th:text="${project.title}">Project Title</h3>
+                    <span class="status-badge" th:text="${project.status}">Status</span>
+                </div>
+                <div class="project-details">
+                    <p><i data-lucide="date">Duration: <span th:text="${project.durationInDays}">0</span> days</p>
+                    <p><i data-lucide="team"></i>Developers: <span th:text="${project.developers.size()}">0</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+
+    function filterProjects() {
+        const filter = document.getElementById('statusFilter').value;
+        const projects = document.querySelectorAll('.project-card');
+
+        projects.forEach(project => {
+            const status = project.getAttribute('data-status');
+            if (filter === 'all' || status === filter) {
+                project.style.display = 'block';
+            } else {
+                project.style.display = 'none';
+            }
+        });
+    }
+</script>
+</body>
+</html>

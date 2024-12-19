@@ -1,0 +1,156 @@
+:root {
+    --primary-color: #4f46e5;
+    --primary-light: #818cf8;
+    --secondary-color: #10b981;
+    --background-color: #f3f4f6;
+    --surface-color: #ffffff;
+    --text-primary: #1f2937;
+    --text-secondary: #4b5563;
+    --input-border: #d1d5db;
+    --input-focus: #4f46e5;
+    --input-bg: #ffffff;
+    --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-content {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+}
+
+.form-card {
+    background-color: var(--surface-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: var(--card-shadow);
+}
+
+h1 {
+    color: var(--text-primary);
+    font-size: 1.875rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left; /* Align contents to the left */
+}
+
+.form-group label {
+    display: block; /* Ensure label spans full width */
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    display: block; /* Make the input block-level */
+    width: 100%; /* Match the width of the button */
+    max-width: 100%; /* Ensure it doesn't exceed container width */
+    padding: 0.75rem 1.5rem; /* Match padding with the button */
+    border: 1px solid var(--input-border);
+    border-radius: 0.5rem; /* Match the border radius of the button */
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 1rem;
+    margin: 0 auto; /* Center the input */
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* Ensure consistent sizing */
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+.form-actions {
+    margin-top: 2rem;
+}
+
+.btn-primary {
+    display: block; /* Consistency between button and inputs */
+    width: 100%; /* Full width */
+    max-width: 100%; /* Ensure it doesn't exceed the container */
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-light);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-3 {
+    margin-top: 1.5rem;
+}
+
+.btn-secondary {
+    display: inline-block;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    color: var(--primary-light);
+    text-decoration: underline;
+}
+
+.form-group select {
+    display: block; /* Make the select block-level */
+    width: 100%; /* Full width */
+    max-width: 100%; /* Ensure it doesn't exceed container width */
+    padding: 0.75rem 1.5rem; /* Match padding with the input */
+    border: 1px solid var(--input-border);
+    border-radius: 0.5rem; /* Match the border radius of the input */
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 1rem;
+    margin: 0 auto; /* Center the select */
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* Ensure consistent sizing */
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+@media (max-width: 640px) {
+    .main-content {
+        padding: 1rem;
+    }
+    
+    .form-card {
+        padding: 1.5rem;
+    }
+}

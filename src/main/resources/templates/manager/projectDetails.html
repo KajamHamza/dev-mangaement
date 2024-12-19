@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/ProjectDetailsStyle.css">
+    <script src="/js/scripts.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Project Details</title>
+</head>
+<body>
+<div class="sidebar">
+    <nav>
+        <p class="nav-label">Navigation</p>
+        <ul>
+            <li><a href="/manager/dashboard"><i data-lucide="layout-dashboard"></i>Dashboard</a></li>
+            <li><a href="/manager/projects" class="active"><i data-lucide="folder"></i>Projects</a></li>
+            <li><a href="/manager/search"><i data-lucide="search"></i>Search Developers</a></li>
+            <li><a href="/manager/settings"><i data-lucide="settings"></i>Settings</a></li>
+            <li><a href="/auth/logout" class="logout"><i data-lucide="log-out"></i>Logout</a></li>
+        </ul>
+    </nav>
+    <div class="theme-toggle">
+        <input type="checkbox" id="themeToggle" />
+        <label for="themeToggle">
+            <i data-lucide="sun"></i>
+        </label>
+    </div>
+</div>
+<div class="main-content">
+    <header>
+        <h1><i data-lucide="folder-open"></i><span th:text="${project.title}"></span></h1>
+    </header>
+    <section class="card">
+        <p><strong>Description:</strong> <span th:text="${project.description}"></span></p>
+        <p><strong>Status:</strong>
+            <span th:text="${project.status}"></span>
+        <form th:action="@{/manager/updateStatus}" method="post">
+            <input type="hidden" name="projectId" th:value="${project.id}" />
+            <select name="status">
+                <option value="Active">Active</option>
+                <option value="Pending">Pending</option>
+                <option value="Completed">Completed</option>
+            </select>
+            <button type="submit">Update</button>
+        </form>
+        </p>
+        <p><strong>Duration In Days :</strong> <span th:text="${project.durationInDays}"></span></p>
+    </section>
+   <section class="card" th:if="${project.developers != null and #lists.size(project.developers) > 0}">
+    <h2><i data-lucide="users"></i> Developers</h2>
+    <ul>
+        <li th:each="developer : ${project.developers}">
+            <span th:text="${developer.username}"></span> (<span th:text="${developer.email}"></span>)
+            <form th:action="@{/manager/evaluateDeveloper}" method="post">
+                <input type="hidden" name="projectId" th:value="${project.id}" />
+                <input type="hidden" name="developerId" th:value="${developer.id}" />
+                <label for="stars">Rating:</label>
+                <select name="stars" id="stars">
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
+                <label for="feedback">Feedback:</label>
+                <textarea name="feedback" id="feedback" placeholder="Write feedback..."></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </li>
+    </ul>
+</section>
+    <section class="card">
+        <h2><i data-lucide="user-plus"></i> Assign Developers</h2>
+        <form th:action="@{/manager/assignDeveloper/{projectId}(projectId=${project.id})}" method="post">
+            <select name="developerIds" multiple>
+                <option th:each="developer : ${availableDevelopers}"
+                        th:value="${developer.id}"
+                        th:text="${developer.username + ' - ' + developer.skills}"></option>
+            </select>
+            <button type="submit">Assign Developers</button>
+        </form>
+    </section>
+</div>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
+</body>
+</html>

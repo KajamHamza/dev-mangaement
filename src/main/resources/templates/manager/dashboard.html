@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/dashboardstyle.css">
+    <script src="/js/scripts.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Dashboard</title>
+</head>
+<body>
+<div class="container">
+    <div class="sidebar">
+        <nav>
+            <p class="nav-label">Navigation</p>
+            <ul>
+                <li><a href="/manager/dashboard" class="active"><i data-lucide="layout-dashboard"></i>Dashboard</a></li>
+                <li><a href="/manager/projects"><i data-lucide="folder"></i>Projects</a></li>
+                <li><a href="/manager/search"><i data-lucide="search"></i>Search Developers</a></li>
+                <li><a href="/manager/settings"><i data-lucide="settings"></i>Settings</a></li>
+                <li><a href="/auth/logout" class="logout"><i data-lucide="log-out"></i>Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>Welcome, Project Manager</h1>
+            <button class="btn-primary" onclick="location.href='/manager/createProject'">
+                <i data-lucide="plus-circle"></i> Create New Project
+            </button>
+        </header>
+        <section class="stats">
+            <div class="card completed">
+                <h2><i data-lucide="check-circle"></i> Completed Projects</h2>
+                <p th:text="${stats[0].values()}"></p>
+            </div>
+            <div class="card ongoing">
+                <h2><i data-lucide="play-circle"></i> Active Projects</h2>
+                <p th:text="${stats[1].values()}"></p>
+            </div>
+            <div class="card pending">
+                <h2><i data-lucide="clock"></i> Pending Projects</h2>
+                <p th:text="${stats[2].values()}"></p>
+            </div>
+        </section>
+        <section class="projects-overview">
+            <h2><i data-lucide="list"></i> Latest Projects</h2>
+            <div class="projects-list" th:if="${projects.isEmpty()}">
+                <p>No projects available. Start creating one!</p>
+            </div>
+            <div class="projects-list" th:each="project : ${projects}">
+                <div class="project-card">
+                    <h3>
+                        <a th:href="@{/manager/project/{id}(id=${project.id})}" th:text="${project.title}"></a>
+                    </h3>
+                    <p><i data-lucide="info"></i> Status: <span th:text="${project.status}"></span></p>
+                    <p><i data-lucide="users"></i> Developers Assigned: <span th:text="${project.developers.size()}"></span></p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>
+</body>
+</html>
+

@@ -19,20 +19,20 @@ public class Project {
     @Column(length = 1000)
     private String description;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id")
+    private ProjectManager projectManager;
+
     @Column(name = "duration_in_days")
     private int durationInDays;
 
     @Enumerated(EnumType.STRING)
     private ProjectStatus status;
 
-    @ElementCollection(fetch = FetchType.LAZY)
+    @ElementCollection
     @CollectionTable(name = "project_required_skills", joinColumns = @JoinColumn(name = "project_id"))
     @Column(name = "skill")
     private List<String> requiredSkills;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_manager_id")
-    private ProjectManager projectManager;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
@@ -45,11 +45,12 @@ public class Project {
     // Constructors
     public Project() {}
 
-    public Project(String title, String description, int durationInDays, ProjectStatus status) {
+    public Project(String title, String description, int durationInDays, ProjectStatus status, List<String> requiredSkills) {
         this.title = title;
         this.description = description;
         this.durationInDays = durationInDays;
         this.status = status;
+        this.requiredSkills = requiredSkills;
     }
 
     // Getters and Setters
@@ -90,8 +91,13 @@ public class Project {
     }
 
     public void setStatus(ProjectStatus status) {
-        this.status = status;
+        if (status != null) {
+            this.status = status;
+        } else {
+            throw new IllegalArgumentException("Project status cannot be null");
+        }
     }
+
 
     public List<String> getRequiredSkills() {
         return requiredSkills;
@@ -115,5 +121,14 @@ public class Project {
 
     public void setDevelopers(List<Developer> developers) {
         this.developers = developers;
+    }
+
+
+    public void addDeveloper(Developer developer) {
+        this.developers.add(developer);
+    }
+
+    public void removeDeveloper(Developer developer) {
+        this.developers.remove(developer);
     }
 }
