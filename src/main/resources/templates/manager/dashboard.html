@@ -9,8 +9,10 @@
 <body>
 <div class="container">
     <div class="sidebar">
+        <div class="logo">
+            <img src="/path/to/your/logo.png" alt="Logo" />
+        </div>
         <nav>
-            <p class="nav-label">Navigation</p>
             <ul>
                 <li><a href="/manager/dashboard" class="active"><i data-lucide="layout-dashboard"></i>Dashboard</a></li>
                 <li><a href="/manager/projects"><i data-lucide="folder"></i>Projects</a></li>
@@ -19,6 +21,12 @@
                 <li><a href="/auth/logout" class="logout"><i data-lucide="log-out"></i>Logout</a></li>
             </ul>
         </nav>
+        <div class="theme-toggle">
+            <input type="checkbox" id="themeToggle" />
+            <label for="themeToggle">
+                <i data-lucide="sun"></i>
+            </label>
+        </div>
     </div>
     <div class="main-content">
         <header>
