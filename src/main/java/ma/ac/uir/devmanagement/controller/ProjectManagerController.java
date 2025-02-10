@@ -1,19 +1,24 @@
 package ma.ac.uir.devmanagement.controller;
 
-import jakarta.servlet.http.HttpSession;
-import ma.ac.uir.devmanagement.entity.Project;
-import ma.ac.uir.devmanagement.entity.Developer;
-import ma.ac.uir.devmanagement.entity.ProjectManager;
-import ma.ac.uir.devmanagement.service.ProjectManagerService;
-import ma.ac.uir.devmanagement.service.DeveloperService;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import jakarta.servlet.http.HttpSession;
+import ma.ac.uir.devmanagement.entity.Developer;
+import ma.ac.uir.devmanagement.entity.Project;
+import ma.ac.uir.devmanagement.entity.ProjectManager;
+import ma.ac.uir.devmanagement.service.DeveloperService;
+import ma.ac.uir.devmanagement.service.ProjectManagerService;
 
 @Controller
 @RequestMapping("/manager")
