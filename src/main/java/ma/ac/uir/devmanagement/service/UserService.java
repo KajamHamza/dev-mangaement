@@ -13,11 +13,4 @@ public interface UserService {
      */
     User authenticate(String username, String password);
 
-    /**
-     * Retrieves a user by their ID.
-     *
-     * @param id the ID of the user
-     * @return the User object, or null if no user is found
-     */
-    User getUserById(Long id);
 }
