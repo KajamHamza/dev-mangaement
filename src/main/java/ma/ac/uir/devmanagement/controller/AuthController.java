@@ -45,15 +45,15 @@ public class AuthController {
         return "redirect:/dashboard";
     }
 
-    // Register Page
-    @GetMapping("/register")
-    public String registerPage() {
-        return "register";
+    // registerrrrrrrrr Page
+    @GetMapping("/registerrrrrrrr")
+    public String registerrrrrrrrPage() {
+        return "registerrrrrrrr";
     }
 
-    // Register Submission
-    @PostMapping("/register")
-    public String register(
+    // registerrrrrrrr Submission
+    @PostMapping("/registerrrrrrrr")
+    public String registerrrrrrrrr(
             @RequestParam String username,
             @RequestParam String email,
             @RequestParam String password,
@@ -61,7 +61,7 @@ public class AuthController {
             Model model) {
         if (userRepository.findByEmail(email) != null) {
             model.addAttribute("error", "Email already exists.");
-            return "register";
+            return "registerrrrrrrrr";
         }
 
         User user;
@@ -73,7 +73,7 @@ public class AuthController {
             projectManagerRepository.save((ProjectManager) user);
         } else {
             model.addAttribute("error", "Invalid role selected.");
-            return "register";
+            return "registerrrrrrrrr";
         }
 
         return "redirect:/auth/login";
